@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>find</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap');
+        @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            color: #2f2f2f;
+        }
+
+        body {
+            font-size: 1rem;
+            font-family: 'Cinzel', 'Noto Serif KR', serif;
+        }
+
+        img {
+            width: 200px;
+        }
+
+        h1 {
+            font-size: 5rem;
+        }
+
+        h2 {
+            font-size: 4rem;
+        }
+
+        h3 {
+            font-size: 3rem;
+            font-weight: normal;
+        }
+
+        h4 {
+            font-size: 2rem;
+            font-weight: normal;
+        }
+
+        h5 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        h6 {
+            font-size: 1rem;
+            font-weight: normal;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: #898C8D;
+            margin-top: 0.3rem
+        }
+
+        #header {
+            width: 100%;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: #fff;
+            height: 80px;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            display: block;
+            transition: top 0.4s;
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #header section {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #header section> :first-child {
+            float: left;
+            transition: 0.5s;
+        }
+
+        #header section> :first-child:hover {
+            opacity: 0.8;
+        }
+
+        #header section> :first-child img {
+            width: 150px;
+            margin-top: 1.5rem;
+        }
+
+        .lap-nav {
+            display: inline-block;
+        }
+
+        .lap-nav>ul>li {
+            float: right;
+            line-height: 3rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .lap-nav>ul>li>a {
+            width: 10rem;
+            padding: 1.3rem 0.7rem;
+            line-height: 4.5rem;
+            font-size: 1.2rem;
+            transition: 0.6s;
+            border-bottom: 2px solid #fff;
+        }
+
+        .lap-nav>ul>li ul {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+        .clearfix>li>ul>li,
+        .lap-nav>ul>li>ul>li {
+            width: 10rem;
+            display: block;
+            border-bottom: 2px solid #fff;
+            transition: 0.6s;
+            cursor: default;
+        }
+
+        .lap-nav>ul>li>a:hover {
+            border-bottom: 2px solid #9f8870;
+        }
+
+        .lap-nav>ul>li>a:hover,
+        .lap-nav>ul>li>ul>li:hover {
+            color: #9f8870;
+        }
+
+        .lap-nav>ul>li>ul>li:hover {
+            border-bottom: 2px solid #9f8870;
+        }
+
+        .lap-nav li img {
+            width: 250px;
+        }
+
+        .snip1577 {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            margin: 6rem 2rem;
+            width: 250px;
+            height: 350px;
+            color: #fff;
+            text-align: left;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .snip1577 *,
+        .snip1577:before,
+        .snip1577:after {
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        .snip1577 img {
+            max-width: 100%;
+            backface-visibility: hidden;
+            vertical-align: top;
+        }
+
+        .snip1577:before,
+        .snip1577:after {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            content: '';
+            background-color: #fff;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        .snip1577:before {
+            width: 0;
+            height: 1px;
+        }
+
+        .snip1577:after {
+            height: 0;
+            width: 1px;
+        }
+
+        .snip1577 figcaption {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            padding: 15px 20px;
+        }
+
+        .snip1577 h3,
+        .snip1577 h4 {
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: normal;
+            color: #fff;
+            opacity: 0;
+        }
+
+        .snip1577 h4 {
+            font-size: .8em;
+            text-transform: uppercase;
+        }
+
+        .snip1577 a {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .snip1577:hover img,
+        .snip1577.hover img {
+            zoom: 1;
+            filter: alpha(opacity=20);
+            opacity: 0.2;
+        }
+
+        .snip1577:hover:before,
+        .snip1577.hover:before,
+        .snip1577:hover:after,
+        .snip1577.hover:after {
+            opacity: 1;
+            transition-delay: 0.25s;
+        }
+
+        .snip1577:hover:before,
+        .snip1577.hover:before {
+            width: 40px;
+        }
+
+        .snip1577:hover:after,
+        .snip1577.hover:after {
+            height: 40px;
+        }
+
+        .snip1577:hover h3,
+        .snip1577.hover h3,
+        .snip1577:hover h4,
+        .snip1577.hover h4 {
+            opacity: 1;
+        }
+
+        .snip1577:hover h3,
+        .snip1577.hover h3 {
+            -webkit-transition-delay: 0.3s;
+            transition-delay: 0.3s;
+        }
+
+        .snip1577:hover h4,
+        .snip1577.hover h4 {
+            -webkit-transition-delay: 0.35s;
+            transition-delay: 0.35s;
+        }
+
+        .nav-2 ul {
+            width: 200px;
+            margin: 1.7rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-2 li {
+            transition: all .3s ease
+        }
+
+        .nav-2 li:hover {
+            color: #bf8365;
+            transition: all .3s ease
+        }
+
+        .nav-2 li>span {
+            position: relative
+        }
+
+        /*밑줄넣기 부분*/
+        .nav-2 li>span::after {
+            content: '';
+            width: 0%;
+            left: 50%;
+            height: 1px;
+            display: block;
+            position: absolute;
+            margin-top: 3px;
+            border-bottom: 2px solid #9f8870;
+            transition: all .3s ease;
+        }
+
+        .nav-2 li:hover>span::after {
+            content: '';
+            width: 100%;
+            left: 0px;
+            height: 1px;
+            display: block;
+            position: absolute;
+            margin-top: 3px;
+            border-bottom: 2px solid #9f8870;
+            transition: all .3s ease;
+        }
+
+        main {
+            height: 300px;
+            margin-top: 5rem;
+            background: url(./image/find_main.jpg) no-repeat;
+            background-size: cover;
+            background-position: center 20%;
+            position: relative;
+        }
+
+        /*.m-box {
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }*/
+
+        main h2 {
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .article01 {
+            width: 1200px;
+            height: 700px;
+            margin: 10rem auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        ul.tabs {
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            text-align: center;
+        }
+
+        ul.tabs li {
+            width: 49.5%;
+            background: none;
+            color: #2f2f2f;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        ul.tabs li.current {
+            background: #9f8870;
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+            background: none;
+            padding: 2rem;
+            height: 600px;
+            border: 1px solid #9f8870;
+        }
+
+        .tab-content.current {
+            display: inherit;
+        }
+
+        .tab-content h2 {
+            font-weight: 700;
+            color: #9f8870;
+            font-size: 35px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .tab-content h2:before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            left: 0;
+            top: 52px;
+            background: #9f8870;
+            height: 1px;
+        }
+
+         :focus {
+            outline: none;
+        }
+
+        /* necessary to give position: relative to parent. */
+        input[type="text"] {
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+            letter-spacing: 1px;
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        .col-3 {
+            float: left;
+            width: 27.33%;
+            margin: 40px 3%;
+            position: relative;
+        }
+
+        /* necessary to give position: relative to parent. */
+        input[type="text"] {
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+            letter-spacing: 1px;
+            padding-left: 1rem;
+        }
+
+        .bg_3 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .bg_3>* {
+            margin: 0;
+        }
+
+        .m-1 {
+            margin: 2rem 0 0;
+        }
+
+        /* necessary to give position: relative to parent. */
+        input[type="text"],
+        input[type="passward"]{
+            font-size: 1.5rem;
+            color: #2f2f2f;
+            width: 500px;
+            height: 50px;
+            box-sizing: border-box;
+            letter-spacing: 1px;
+        }
+
+        .effect-21~.focus-border:before,
+        .effect-21~.focus-border:after,
+        .effect-22~.focus-border:before,
+        .effect-22~.focus-border:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -354px;
+            width: 0;
+            height: 2px;
+            background-color: #9f8870;
+            transition: 0.2s;
+            transition-delay: 0.2s;
+        }
+
+        .effect-21~.focus-border:after,
+        .effect-22~.focus-border:after {
+            top: auto;
+            bottom: 0;
+            left: 0;
+            transition-delay: 0.6s;
+        }
+
+        .effect-21~.focus-border i:before,
+        .effect-21~.focus-border i:after,
+        .effect-22~.focus-border i:before,
+        .effect-22~.focus-border i:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 0;
+            background-color: #9f8870;
+            transition: 0.2s;
+        }
+
+        .effect-21~.focus-border i:after,
+        .effect-22~.focus-border i:after {
+            left: auto;
+            right: 0;
+            top: auto;
+            bottom: 0;
+            transition-delay: 0.4s;
+        }
+
+        .effect-21:focus~.focus-border:before,
+        .effect-21:focus~.focus-border:after,
+        .has-content.effect-21~.focus-border:before,
+        .has-content.effect-21~.focus-border:after,
+        .effect-22:focus~.focus-border:before,
+        .effect-22:focus~.focus-border:after,
+        .has-content.effect-22~.focus-border:before,
+        .has-content.effect-22~.focus-border:after {
+            width: 342%;
+            transition: 0.2s;
+            transition-delay: 0.6s;
+        }
+
+        .effect-21:focus~.focus-border:after,
+        .has-content.effect-21~.focus-border:after,
+        .effect-22:focus~.focus-border:after,
+        .has-content.effect-22~.focus-border:after {
+            transition-delay: 0.2s;
+        }
+
+        .effect-21:focus~.focus-border i:before,
+        .effect-21:focus~.focus-border i:after,
+        .has-content.effect-21~.focus-border i:before,
+        .has-content.effect-21~.focus-border i:after,
+        .effect-22:focus~.focus-border i:before,
+        .effect-22:focus~.focus-border i:after,
+        .has-content.effect-22~.focus-border i:before,
+        .has-content.effect-22~.focus-border i:after {
+            height: 100%;
+            transition: 0.2s;
+        }
+
+        .effect-21:focus~.focus-border i:after,
+        .has-conten.effect-21~.focus-border i:after,
+        .effect-22:focus~.focus-border i:after,
+        .has-conten.effect-22~.focus-border i:after {
+            transition-delay: 0.4s;
+        }
+
+        .effect-21~label,
+        .effect-22~label {
+            position: absolute;
+            left: 14px;
+            width: 100%;
+            top: 13px;
+            color: #aaa;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+
+        .effect-21:focus~label,
+        .has-content.effect-21~label,
+        .effect-22:focus~label,
+        .has-content.effect-22~label {
+            top: -25px;
+            left: 5px;
+            font-size: 1rem;
+            color: #2f2f2f;
+            transition: 0.3s;
+        }
+
+        .p-btn button,
+        .p-btn button::after {
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+        .p-btn button {
+            background: none;
+            border: 1px solid #9f8870;
+            color: #9f8870;
+            display: block;
+            width: 500px;
+            height: 50px;
+            margin: 0.5rem 0;
+            font-weight: bold;
+            position: relative;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .p-btn button::before,
+        .p-btn button::after {
+            background: #9f8870;
+            content: '';
+            position: absolute;
+            z-index: -1;
+        }
+
+        .p-btn button:hover {
+            color: #fff;
+        }
+
+        .btn-2::after {
+            height: 100%;
+            left: 0;
+            top: 0;
+            width: 0;
+        }
+
+        .btn-2:hover:after {
+            width: 100%;
+        }
+
+        .btn-2 i {
+            color: #9f8870;
+            font-size: 1rem;
+            margin-right: 1rem;
+        }
+
+        .p-btn button:hover i {
+            color: #fff;
+        }
+
+        li span {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .radio-btn input[type="radio"],
+        .check-box input[type="checkbox"] {
+            visibility: hidden;
+        }
+
+        .check-box {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 2px 7px 0 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 1px #ccc;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            background: rgb(255, 255, 255);
+            background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(47%, rgba(246, 246, 246, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+            background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+            border: 1px solid #ccc;
+        }
+
+        .check-box i {
+            background: url('http://cdn1.iconfinder.com/data/icons/mimiGlyphs/16/check_mark.png') no-repeat center center;
+            position: absolute;
+            left: 3px;
+            bottom: -15px;
+            width: 16px;
+            height: 16px;
+            opacity: .5;
+            -webkit-transition: all 400ms ease-in-out;
+            -moz-transition: all 400ms ease-in-out;
+            -o-transition: all 400ms ease-in-out;
+            transition: all 400ms ease-in-out;
+            -webkit-transform: rotateZ(-180deg);
+            -moz-transform: rotateZ(-180deg);
+            -o-transform: rotateZ(-180deg);
+            transform: rotateZ(-180deg);
+        }
+
+        .checkedBox {
+            -moz-box-shadow: inset 0 0 5px 1px #ccc;
+            -webkit-box-shadow: inset 0 0 5px 1px #ccc;
+            box-shadow: inset 0 0 5px 1px #ccc;
+            border-bottom-color: #fff;
+        }
+
+        .checkedBox i {
+            bottom: 2px;
+            -webkit-transform: rotateZ(0deg);
+            -moz-transform: rotateZ(0deg);
+            -o-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+        }
+
+        .save {
+            width: 500px;
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0 3rem;
+        }
+
+        .save nav ul {
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .enrollment {
+            width: 415px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+
+        .enrollment .p-btn button {
+            background: none;
+            border: 1px solid #9f8870;
+            color: #9f8870;
+            display: block;
+            width: 50%;
+            height: 50px;
+            margin: 2rem 0;
+            font-weight: bold;
+            position: relative;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .p-btn button::before,
+        .p-btn button::after {
+            background: #9f8870;
+            content: '';
+            position: absolute;
+            z-index: -1;
+        }
+
+        .p-btn button:hover {
+            color: #fff;
+        }
+
+        .btn-2::after {
+            height: 100%;
+            left: 0;
+            top: 0;
+            width: 0;
+        }
+
+        .btn-2:hover:after {
+            width: 100%;
+        }
+
+        .btn-2 i {
+            color: #9f8870;
+            font-size: 1rem;
+            margin-right: 1rem;
+        }
+
+        .p-btn button:hover i {
+            color: #fff;
+        }
+
+        footer {
+            min-width: 1200px;
+            height: 400px;
+            margin-top: 10rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #9f8870;
+        }
+
+        footer>div {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+
+        footer div> :nth-child(3)> :nth-child(2) {
+            margin: 2rem 0 0;
+        }
+
+        footer div img {
+            margin: 0 0 2rem 0;
+        }
+
+        footer nav a {
+            margin: 0.5rem;
+        }
+
+        footer p,
+        footer nav a span {
+            color: #fff;
+        }
+
+        .left-up {
+            margin-bottom: 15px !important;
+            font-size: 16px !important;
+            display: inline-block !important;
+        }
+
+        .left-up:after {
+            position: absolute;
+            z-index: -1
+        }
+
+        .left-up:after {
+            content: "";
+            width: 3px;
+            height: 3px;
+            bottom: 0;
+            left: 0
+        }
+
+        .left-up:focus:after,
+        .left-up:hover:after {
+            width: 3px;
+            height: 100%
+        }
+
+        .left-side {
+            position: fixed;
+            background: #2f2f2f;
+            overflow: auto;
+            z-index: 1;
+            left: -100%
+        }
+
+        .effect-demo,
+        .left-up {
+            font-size: 3em;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            text-decoration: none;
+            padding: 10px 0 10px 10px;
+            white-space: nowrap;
+            overflow: hidden
+        }
+
+        .left-up {
+            text-transform: uppercase;
+            display: inline;
+            box-sizing: border-box;
+            user-select: none;
+            transition: color 1s ease
+        }
+
+        .left-up:focus,
+        .left-up:hover {
+            outline: 0;
+            color: #2f2f2f;
+            transition: color 1s ease;
+            cursor: pointer
+        }
+
+        .left-up:after,
+        .left-up:before {
+            transition: all 1s ease 0s
+        }
+
+        .left-up:focus:after,
+        .left-up:focus:before,
+        .left-up:hover:after,
+        .left-up:hover:before {
+            outline: 0;
+            background-color: #2f2f2f;
+            transition: all 1s ease 0s
+        }
+
+        a#topBtn {
+            position: fixed;
+            bottom: 5%;
+            right: 2%;
+            display: inline-block;
+            text-align: center;
+            width: 60px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #fff;
+            background-color: #9f8870;
+            transform: scale(0.5);
+            opacity: 0;
+            transition: 0.8s ease;
+            cursor: pointer;
+            z-index: 999999;
+        }
+
+        a#topBtn:hover {
+            background-color: #2f2f2f;
+        }
+
+        a#topBtn.on {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+
+   <header>
+
+        <article id="header">
+            <section>
+                <div onclick="window.location.href='http://silverflower.dothome.co.kr/yunjac/index.html'">
+                    <img src="https://www.yunjac.com/images/logo-blk.png">
+                </div>
+                <nav class="lap-nav">
+                    <ul class="clearfix">
+                        <li><a href="http://silverflower.dothome.co.kr/yunjac/join.html">JOIN</a></li>
+                        <li><a href="http://silverflower.dothome.co.kr/yunjac/find.html">FIND</a></li>
+                        <li><a href="http://silverflower.dothome.co.kr/yunjac/login.html">LOGIN</a></li>
+                        <li>
+                            <figure class="snip1577">
+                                <img src="https://image.elle.co.kr/upload/NEWS/2018/11/ncd_112896654/20181128_133601234_84016.jpg" alt="sample99" />
+                                <figcaption>
+                                    <h3>YUNJAC</h3>
+                                    <h4>한방 화장품의 틀을 부수다</h4>
+                                </figcaption>
+                                <a href="#"></a>
+                            </figure>
+                        </li>
+                        <li><a href="http://silverflower.dothome.co.kr/yunjac/qna.html">Q&amp;A</a>
+                            <ul>
+                                <li>BEST SALLER</li>
+                                <li>SKIN CARE</li>
+                                <li>MAKE-UP</li>
+                                <li>MOTHER HOOD</li>
+                                <li>LIFE CARE</li>
+                            </ul>
+                        </li>
+                        <li><a href="http://silverflower.dothome.co.kr/yunjac/purchase.html">PURCAHSE</a>
+                            <ul>
+                                <li>BARND STORY</li>
+                                <li>KOREANS HERB</li>
+                                <li>MEDIA</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="http://silverflower.dothome.co.kr/yunjac/recommend.html">RECOMMEND</a>
+                            <ul>
+                                <li>NEW</li>
+                                <li>BEST</li>
+                                <li>PRODUCT</li>
+                                <li>BRAND</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </article>
+
+    </header>
+
+    <main>
+
+        <div class="m-box"></div>
+        <h2>find</h2>
+
+    </main>
+
+
+    <article class="article01">
+        <div class="container">
+
+            <ul class="tabs">
+                <li class="tab-link current" data-tab="tab-1">아이디 찾기</li>
+                <li class="tab-link" data-tab="tab-2">비밀번호 찾기</li>
+            </ul>
+
+            <div id="tab-1" class="tab-content current">
+                <div class="row bg_3">
+                    <h2><i>아이디 찾기</i></h2>
+                    <div class="col-3 input-effect">
+                        <input class="effect-21" type="text" placeholder="">
+                        <label>이름</label>
+                        <span class="focus-border"></span>
+                        <i></i>
+                    </div>
+                    <div class="col-3 input-effect m-1">
+                        <input class="effect-22" type="text" placeholder="">
+                        <label>생년월일</label>
+                        <span class="focus-border"></span>
+                        <i></i>
+                    </div>
+                    <div class="col-3 input-effect m-1">
+                        <input class="effect-22" type="text" placeholder="">
+                        <label>핸드폰('-' 제외입력)</label>
+                        <span class="focus-border"></span>
+                        <i></i>
+                    </div>
+                    <p> 본인 확인 5회 실패시 당일 휴대폰 인증이 제한 됩니다.</p>
+                    <p>[알림] 본인확인 차단된 경우 : 차단해제하기</p>
+                    <p>고객서비스센터 080-023-5454</p> <br>
+                    <div class="p-btn">
+                        <button class="btn-2"><i class="fas fa-check"></i>아이디찾기</button>
+                    </div>
+                    <div class="save">
+                        <nav>
+                            <ul>
+                                <li>회원가입</li>|
+                                <li>아이디 찾기</li>|
+                                <li>비밀번호 찾기</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-2" class="tab-content">
+                <div class="row bg_3">
+                    <h2><i>비밀번호 찾기</i></h2>
+                    <div class="col-3 input-effect">
+                        <input class="effect-21" type="text" placeholder="">
+                        <label>아이디</label>
+                        <span class="focus-border"></span>
+                        <i></i>
+                    </div>
+                    <div class="col-3 input-effect m-1">
+                        <input class="effect-21" type="text" placeholder="">
+                        <label>이름</label>
+                        <span class="focus-border"></span>
+                        <i></i>
+                    </div>
+                    <div class="col-3 input-effect m-1">
+                        <input class="effect-22" type="text" placeholder="">
+                        <label>핸드폰('-' 제외입력)</label>
+                        <span class="focus-border"></span>
+                        <i></i>
+                    </div>
+                    <p> 본인 확인 5회 실패시 당일 휴대폰 인증이 제한 됩니다.</p>
+                    <p>[알림] 본인확인 차단된 경우 : 차단해제하기</p>
+                    <p>고객서비스센터 080-023-5454</p> <br>
+                    <div class="p-btn">
+                        <button class="btn-2"><i class="fas fa-check"></i>비밀번호 찾기</button>
+                    </div>
+                    <div class="save">
+                        <nav>
+                            <ul>
+                                <li>회원가입</li>|
+                                <li>아이디 찾기</li>|
+                                <li>비밀번호 찾기</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="enrollment">
+            <h5>YUNJAC 회원으로 가입하시면 <br>빠르고 편리하게 이용하실 수 있습니다.</h5>
+            <p>아직 YUNJAC의 회원이 아니시라면 이메일로 간편하게 가입하실 수 있습니다.</p>
+            <div class="p-btn">
+                <button class="btn-2">이메일 등록</button>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+
+        <div>
+            <div>
+                <img src="https://www.yunjac.com/images/logo-wh.png" alt=""><br>
+                <p>(주)신세계인터내셔날 <br>
+                    대표이사: 장재영, 이길한, 손문국 <br>
+                    주소 : 서울특별시 강남구 도산대로 449 (청담동) <br>
+                    대표전화 : 1644-4490 <br>
+                    © 2018 SHINSEGAE INTERNATIONAL. ALL RIGHTS RESERVED</p>
+            </div>
+            <div>
+                <nav>
+                    <div>
+                        <a href="#"><span class="left-up">COMPANY</span></a>
+                        <a href="#"><span class="left-up">CONTACT</span></a>
+                        <a href="#"><span class="left-up">PRIVARY</span></a>
+                        <a href="#"><span class="left-up">SITE MAP</span></a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <a id="topBtn">Top</a>
+    </footer>
+
+    <script>
+        $(function() {
+            var $firstMenu = $('#header nav > ul > li '),
+                $header = $('#header');
+
+            $firstMenu.mouseenter(function() {
+                    $header.stop().animate({
+                        height: '500px'
+                    });
+                })
+                .mouseleave(function() {
+                    $header.stop().animate({
+                        height: '80px'
+                    });
+                });
+
+        });
+
+        /*네비게이션 픽스*/
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+            var currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("header").style.top = "0";
+            } else {
+                document.getElementById("header").style.top = "-80px";
+            }
+            prevScrollpos = currentScrollPos;
+        }
+        console.clear();
+
+        $(document).ready(function() {
+
+            $('ul.tabs li').click(function() {
+                var tab_id = $(this).attr('data-tab');
+
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+
+                $(this).addClass('current');
+                $("#" + tab_id).addClass('current');
+            })
+
+        });
+
+        $('input[name="check-box"]').wrap('<div class="check-box"><i></i></div>');
+        $.fn.toggleCheckbox = function() {
+            this.attr('checked', !this.attr('checked'));
+        }
+        $('.check-box').on('click', function() {
+            $(this).find(':checkbox').toggleCheckbox();
+            $(this).toggleClass('checkedBox');
+        });
+
+        $(window).scroll(function() {
+
+            var Top = $(this).scrollTop();
+
+            if (Top > 100) {
+                $("#topBtn").addClass('on');
+            }
+            if (Top < 100) {
+                $("#topBtn").removeClass('on');
+            }
+        });
+
+        $("#topBtn").click(function() {
+
+            $("html, body").animate({
+                scrollTop: 0
+            }, 1000);
+        });
+    </script>
+</body></html>
